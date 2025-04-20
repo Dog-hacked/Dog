@@ -1,0 +1,57 @@
+# ===================================================
+# 🐾 CyberDog - Process Watchdog
+# Made by Dog/CarterC
+# ===================================================
+
+import os
+import time
+import datetime
+import platform
+import psutil  # pip install psutil
+import logging
+
+# ====== Config ======
+SUSPICIOUS_KEYWORDS = ["keylogger", "miner", "rat", "hack", "exploit", "stealer"]
+SCAN_INTERVAL = 5  # seconds between scans
+LOGFILE = "cyberdog_log.txt"
+
+# ====== Setup Logging ======
+logging.basicConfig(
+    filename=LOGFILE,
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+def is_suspicious(proc_name):
+    for word in SUSPICIOUS_KEYWORDS:
+        if word.lower() in proc_name.lower():
+            return True
+    return False
+
+def scan_processes():
+    print(f"[🐶] Scanning processes at {datetime.datetime.now()}...")
+    for proc in psutil.process_iter(['pid', 'name']):
+        try:
+            name = proc.info['name']
+            if name and is_suspicious(name):
+                msg = f"[⚠️] Suspicious process detected: {name} (PID {proc.pid})"
+                print(msg)
+                logging.warning(msg)
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            continue
+
+def cyberdog_loop():
+    print("🐾 CyberDog is now watching your system...")
+    while True:
+        scan_processes()
+        time.sleep(SCAN_INTERVAL)
+
+if __name__ == "__main__":
+    print("=== CyberDog Watchdog System ===")
+    print(f"🐍 Python Version: {platform.python_version()}")
+    print(f"🖥️ Platform: {platform.system()} {platform.release()}")
+    print("Press Ctrl+C to exit.")
+    try:
+        cyberdog_loop()
+    except KeyboardInterrupt:
+        print("\n[🛑] CyberDog has been called off. Stay safe out there.")
