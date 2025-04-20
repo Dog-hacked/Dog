@@ -1,0 +1,62 @@
+import sys
+
+# Intro and Branding
+def play_intro():
+    print("""
+ ██████╗ █████╗ ██████╗ ████████╗███████╗██████╗    
+██╔════╝██╔══██╗██╔══██╗╚══██╔══╝██╔════╝██╔══██╗   
+██║     ███████║██████╔╝   ██║   █████╗  ██████╔╝   
+██║     ██╔══██║██╔═══╝|   ██║   ██╔══╝  ██╔══██╗   
+╚██████╗██║  ██║██║   #|   ██║   ███████╗██║  ██║   
+ ╚═════╝╚═╝  ╚═╝╚═╝   #|   ╚═╝   ╚══════╝╚═╝  ╚═╝   
+         🧠 Coded in chaos by Carter Cotlove 🧠
+""")
+    print("Loading your calculator... Woof!")
+    print("Ready to do some math? Let's go!\n")
+
+# Tutorial to explain how the calculator works
+def display_tutorial():
+    print("""
+Welcome to the Dog Math Calculator! 🐶
+
+Here's how to use it:
+
+1. You can perform basic math operations like:
+   - Addition: 5 + 3
+   - Subtraction: 7 - 2
+   - Multiplication: 4 * 6
+   - Division: 9 / 3
+
+2. To exit the calculator at any time, simply type: exit
+
+3. If you enter an invalid operation, like 5 + some_text, the program will ask you to try again.
+
+Now, let's get calculating! Woof! 🐾
+""")
+
+# Function to perform the calculation
+def calculate():
+    while True:
+        try:
+            print("\nEnter a math operation (+, -, *, /) or 'exit' to quit:")
+            operation = input("Enter: ").strip()
+
+            if operation.lower() == 'exit':
+                print("Goodbye! Woof!")
+                break
+
+            # Evaluating the math operation
+            result = eval(operation)
+            print(f"Result: {result}")
+
+        except Exception as e:
+            print(f"Error: {e}. Please try again with a valid math operation.")
+
+# Main function to run the CLI
+def main():
+    play_intro()
+    display_tutorial()  # Display the tutorial before starting the calculator
+    calculate()
+
+if __name__ == "__main__":
+    main()
