@@ -1,0 +1,98 @@
+Nano Dogwordle
+Python3 Dogwordle
+
+
+for windows 
+
+powershell -Command "Invoke-WebRequest https://www.python.org/ftp/python/3.12.2/python-3.12.2-amd64.exe -OutFile python-installer.exe; Start-Process .\python-installer.exe -ArgumentList '/quiet InstallAllUsers=1 PrependPath=1 Include_test=0' -Wait; Remove-Item .\python-installer.exe; python --version"
+
+import random
+import time
+import sys
+
+# Game settings
+WORD_LIST = ['apple', 'grape', 'melon', 'lemon', 'peach', 'plum', 'berry', 'cherry']
+WORD_LENGTH = 5
+
+# Intro and Branding
+def play_intro():
+    print("""
+    ██████╗ █████╗ ██████╗ ████████╗███████╗██████╗    
+    ██╔════╝██╔══██╗██╔══██╗╚══██╔══╝██╔════╝██╔══██╗   
+    ██║     ███████║██████╔╝   ██║   █████╗  ██████╔╝   
+    ██║     ██╔══██║██╔═══╝|   ██║   ██╔══╝  ██╔══██╗   
+    ╚██████╗██║  ██║██║   #|   ██║   ███████╗██║  ██║   
+     ╚═════╝╚═╝  ╚═╝╚═╝   #|   ╚═╝   ╚══════╝╚═╝  ╚═╝   
+         🧠 Coded in chaos by Carter Cotlove 🧠
+    """)
+
+    print("Loading your game... Woof!")
+    time.sleep(1)
+    print("Get ready for your Wordle adventure!")
+    time.sleep(2)
+
+def bark_alert():
+    print("🐶 BARK! Let's play Wordle!")
+    print("\a")  # Terminal bell sound for a bark!
+
+def slow_type(text, delay=0.03):
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()
+
+# Game functions
+def get_random_word():
+    return random.choice(WORD_LIST)
+
+def display_key():
+    print("\nHere's what each indication means:")
+    print("[LETTER] = Correct letter, correct position")
+    print("(LETTER) = Correct letter, wrong position")
+    print("LETTER = Incorrect letter")
+    print("\nNow, let's play Wordle!")
+
+def display_board(guess, correct_word):
+    display = ""
+    for i in range(WORD_LENGTH):
+        if guess[i] == correct_word[i]:
+            display += f"[{guess[i].upper()}] "
+        elif guess[i] in correct_word:
+            display += f"({guess[i]}) "
+        else:
+            display += f" {guess[i]}  "
+    print(display.strip())
+
+def play_wordle():
+    correct_word = get_random_word()
+    attempts = 6
+    print("\nYou have 6 attempts to guess the 5-letter word!")
+    
+    while attempts > 0:
+        guess = input(f"\nAttempt {7 - attempts}/6: Enter your guess: ").lower()
+        
+        if len(guess) != WORD_LENGTH or not guess.isalpha():
+            print("Invalid guess! Please enter a 5-letter word.")
+            continue
+        
+        display_board(guess, correct_word)
+        
+        if guess == correct_word:
+            print(f"\n🎉 You guessed the word '{correct_word}' correctly! 🎉")
+            break
+        
+        attempts -= 1
+        
+        if attempts == 0:
+            print(f"\n[🛑] You've run out of attempts! The correct word was '{correct_word}'. Better luck next time!")
+
+# Main function
+def main():
+    play_intro()
+    display_key()  # Display the simplified key to the player
+    bark_alert()
+    play_wordle()
+
+if __name__ == "__main__":
+    main()
