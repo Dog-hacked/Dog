@@ -1,5 +1,5 @@
 # Dog
-Dog: I like cyber and yeah. # 🐍 Dog Python Systems
+Dog: I like cyber and yeah, I work on a chromebook so if your in school dont give up. # 🐍 Dog Python Systems
 
 A collection of Python tools, experiments, and code-powered chaos.  
 Built to run fast, hit hard, and stay sharp.
