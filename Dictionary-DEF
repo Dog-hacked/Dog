@@ -1,0 +1,49 @@
+# ===================================================
+# 🐍 Dog Python Systems - Dictionary Mode Activated
+# By CarterC
+# ===================================================
+
+def main():
+    # 📘 Create a dictionary
+    dog_dict = {
+        "name": "Rex",
+        "breed": "Cyber Shepherd",
+        "age": 3,
+        "vaccinated": True
+    }
+
+    print("📦 Original Dictionary:")
+    print(dog_dict)
+
+    # ✏️ Update an entry
+    dog_dict["age"] += 1
+    print("\n🎂 Happy Birthday! Age is now:", dog_dict["age"])
+
+    # ➕ Add a new key-value pair
+    dog_dict["owner"] = "CarterC"
+    print("\n🆕 Added owner:", dog_dict["owner"])
+
+    # ❌ Delete a key
+    if "vaccinated" in dog_dict:
+        del dog_dict["vaccinated"]
+        print("\n💉 Vaccination info removed.")
+
+    # 🔍 Look something up safely
+    breed = dog_dict.get("breed", "Unknown Breed")
+    print("\n🐶 Breed:", breed)
+
+    # 🔁 Loop through dictionary
+    print("\n📋 Dictionary Contents:")
+    for key, value in dog_dict.items():
+        print(f" - {key}: {value}")
+
+    # 🎯 Dictionary comprehension
+    uppercased = {k.upper(): str(v).upper() for k, v in dog_dict.items()}
+    print("\n🔡 Uppercased Version:")
+    print(uppercased)
+
+    # 🧼 Clear the dictionary (careful!)
+    # dog_dict.clear()
+
+if __name__ == "__main__":
+    main()
