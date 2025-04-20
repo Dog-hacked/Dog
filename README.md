@@ -9,3 +9,4 @@ Just don't pet the code without supervision.
 
 — Dog/CarterC
 
+ gh repo clone Dog-hacked/Dog
