@@ -1,0 +1,44 @@
+# ===================================================
+# 🐾 Dog/CarterC Email Sender
+# Legit. Clean. Professional.
+# ===================================================
+
+import smtplib
+from email.message import EmailMessage
+
+# === CONFIGURATION ===
+EMAIL_ADDRESS = "your_email@gmail.com"         # Replace with your sender email
+EMAIL_PASSWORD = "your_app_password_here"      # Use an app-specific password
+TO_ADDRESS = "recipient@example.com"           # Who you're sending to
+
+def send_email(subject, body, to_address=TO_ADDRESS):
+    msg = EmailMessage()
+    msg["From"] = EMAIL_ADDRESS
+    msg["To"] = to_address
+    msg["Subject"] = subject
+    msg.set_content(body)
+
+    try:
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+            smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+            smtp.send_message(msg)
+            print("[✓] Email sent successfully. Powered by Dog Python Systems.")
+    except Exception as e:
+        print("[🛑] Failed to send email:", e)
+
+if __name__ == "__main__":
+    print("======================================")
+    print("🐾 Dog/CarterC Email Sender")
+    print("Legit. Clean. No Spam. No Jail Time.")
+    print("======================================\n")
+
+    send_email(
+        subject="Hello from Dog Python Systems",
+        body="""
+This is a test email sent using Python.
+
+You're receiving this from Dog/CarterC — where code barks back.
+
+Stay sharp. Stay secure.
+"""
+    )
